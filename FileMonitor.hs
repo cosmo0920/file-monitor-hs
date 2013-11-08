@@ -2,6 +2,11 @@ import System.Directory
 import System.IO
 import Filesystem
 import System.FSNotify
+import Data.Digest.Pure.SHA
+import qualified Data.ByteString.Lazy.Char8 as BL
+import qualified Data.Text                  as T
+import Data.Text.Encoding
+import Encode
 
 main :: IO ()
 main = do
@@ -22,3 +27,6 @@ main = do
   stopManager man
   getLine
   return ()
+
+uniqueName :: String -> String
+uniqueName = showDigest . sha1 . fromStrict' . encodeUtf8 . T.pack
