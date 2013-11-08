@@ -34,11 +34,11 @@ main = do
   getLine
   return ()
 
-uniqueName :: String -> String
-uniqueName = showDigest . sha1 . fromStrict' . encodeUtf8 . T.pack
+sha1Digest :: String -> String
+sha1Digest = showDigest . sha1 . fromStrict' . encodeUtf8 . T.pack
 
 showSHA1 :: FP.FilePath -> IO String
 showSHA1 dir = do
   content <- readFile $ FP.encodeString dir
-  let uniq = uniqueName content
-  return uniq
+  let digest = sha1Digest content
+  return digest
