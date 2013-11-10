@@ -1,0 +1,9 @@
+language: haskell
+
+script:
+  - ~/.cabal/bin/cabal-dev configure
+  - ~/.cabal/bin/cabal-dev build
+
+install:
+  - cabal install cabal-dev
+  - ~/.cabal/bin/cabal-dev install --only-dependencies
